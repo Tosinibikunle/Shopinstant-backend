@@ -13,12 +13,12 @@ class UserAdmin(BaseUserAdmin):
        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'is_vendor', 'groups', 'user_permissions')}),
        ('Important dates', {'fields': ('last_login', 'date_joined')}),
    )
-                                                    add_fieldsets = (
-                                                            (None, {
-                                                                        'classes': ('wide',),
-                                                                                    'fields': ('email', 'first_name', 'last_name', 'password1', 'password2'),
-                                                                                            }),
-                                                                                                )
+    add_fieldsets = (
+          (None, {
+             'classes': ('wide',),
+             'fields': ('email', 'first_name', 'last_name', 'password1', 'password2'),
+          }),
+      )
                                                                                                     search_fields = ('email', 'first_name', 'last_name')
 
                                                                                                     admin.site.register(User, UserAdmin)
