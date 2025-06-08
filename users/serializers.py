@@ -8,16 +8,16 @@ User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-            model = User
-                    fields = ['id', 'email', 'first_name', 'last_name', 'phone_number', 'is_vendor', 'date_joined']
+         model = User
+         fields = ['id', 'email', 'first_name', 'last_name', 'phone_number', 'is_vendor', 'date_joined']
 
-                    class RegisterSerializer(serializers.ModelSerializer):
-                        password = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
-                            password2 = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
+    class RegisterSerializer(serializers.ModelSerializer):
+         password = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
+         password2 = serializers.CharField(write_only=True, required=True, style={'input_type': 'password'})
 
-                                class Meta:
-                                        model = User
-                                                fields = ['email', 'first_name', 'last_name', 'phone_number', 'password', 'password2']
+    class Meta:
+        model = User
+        fields = ['email', 'first_name', 'last_name', 'phone_number', 'password', 'password2']
 
                                                     def validate(self, data):
                                                             if data['password'] != data['password2']:
