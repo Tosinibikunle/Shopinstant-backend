@@ -19,25 +19,21 @@ class RegisterView(generics.CreateAPIView):
          token_serializer = UserWithTokenSerializer(user)
          return Response(token_serializer.data, status=status.HTTP_201_CREATED)
 
-                                                    class LoginView(generics.GenericAPIView):
-                                                        serializer_class = LoginSerializer
-                                                            permission_classes = [permissions.AllowAny]
+class LoginView(generics.GenericAPIView):
+    serializer_class = LoginSerializer
+    permission_classes = [permissions.AllowAny]
 
-                                                                def post(self, request, *args, **kwargs):
-                                                                        serializer = self.get_serializer(data=request.data)
-                                                                                serializer.is_valid(raise_exception=True)
+    def post(self, request, *args, **kwargs):
+       serializer = self.get_serializer(data=request.data)
+       serializer.is_valid(raise_exception=True)
 
-                                                                                        user = authenticate(
-                                                                                                    request,
-                                                                                                                email=serializer.validated_data['email'],
-                                                                                                                            password=serializer.validated_data['password']
-                                                                                                                                    )
+       user = authenticate( request, email=serializer.validated_data['email'], password=serializer.validated_data['password' )
 
-                                                                                                                                            if not user:
-                                                                                                                                                        return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+       if not user:
+          return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
-                                                                                                                                                                token_serializer = UserWithTokenSerializer(user)
-                                                                                                                                                                        return Response(token_serializer.data, status=status.HTTP_200_OK)
+          token_serializer = UserWithTokenSerializer(user)
+      return Response(token_serializer.data, status=status.HTTP_200_OK)
 
                                                                                                                                                                         class ProfileView(generics.RetrieveAPIView):
                                                                                                                                                                             serializer_class = UserSerializer
