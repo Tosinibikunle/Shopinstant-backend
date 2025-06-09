@@ -35,9 +35,10 @@ class LoginView(generics.GenericAPIView):
           token_serializer = UserWithTokenSerializer(user)
       return Response(token_serializer.data, status=status.HTTP_200_OK)
 
-                                                                                                                                                                        class ProfileView(generics.RetrieveAPIView):
-                                                                                                                                                                            serializer_class = UserSerializer
-                                                                                                                                                                                permission_classes = [permissions.IsAuthenticated]
 
-                                                                                                                                                                                    def get_object(self):
-                                                                                                                                                                                            return self.request.user
+class ProfileView(generics.RetrieveAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
