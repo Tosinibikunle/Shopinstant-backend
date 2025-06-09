@@ -10,14 +10,14 @@ User = get_user_model()
 
 class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
-        permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.AllowAny]
 
-            def post(self, request, *args, **kwargs):
-                    serializer = self.get_serializer(data=request.data)
-                            serializer.is_valid(raise_exception=True)
-                                    user = serializer.save()
-                                            token_serializer = UserWithTokenSerializer(user)
-                                                    return Response(token_serializer.data, status=status.HTTP_201_CREATED)
+    def post(self, request, *args, **kwargs):
+         serializer = self.get_serializer(data=request.data)
+         serializer.is_valid(raise_exception=True)
+         user = serializer.save()
+         token_serializer = UserWithTokenSerializer(user)
+         return Response(token_serializer.data, status=status.HTTP_201_CREATED)
 
                                                     class LoginView(generics.GenericAPIView):
                                                         serializer_class = LoginSerializer
