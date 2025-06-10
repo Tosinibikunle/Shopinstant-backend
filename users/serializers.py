@@ -29,12 +29,12 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**validated_data)
         return user
 
-                                                                                                            class LoginSerializer(serializers.Serializer):
-                                                                                                                email = serializers.EmailField()
-                                                                                                                    password = serializers.CharField(write_only=True, style={'input_type': 'password'})
+ class LoginSerializer(serializers.Serializer):
+      email = serializers.EmailField()    
+      password = serializers.CharField(write_only=True, style={'input_type': 'password'})
 
-                                                                                                                    class UserWithTokenSerializer(serializers.ModelSerializer):
-                                                                                                                        token = serializers.SerializerMethodField()
+ class UserWithTokenSerializer(serializers.ModelSerializer):
+     token = serializers.SerializerMethodField()
 
                                                                                                                             class Meta:
                                                                                                                                     model = User
