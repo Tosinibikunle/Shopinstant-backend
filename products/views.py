@@ -17,10 +17,10 @@ class ProductListCreateView(generics.ListCreateAPIView):
      def perform_create(self, serializer):
         serializer.save(seller=self.request.user)
 
-                                class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
-                                        queryset = Product.objects.all()
-                                            serializer_class = ProductSerializer
-                                                permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
+     queryset = Product.objects.all()
+     serializer_class = ProductSerializer
+     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-                                                    def perform_update(self, serializer):
-                                                            serializer.save(seller=self.request.user)
+     def perform_update(self, serializer):
+        serializer.save(seller=self.request.user)
