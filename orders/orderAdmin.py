@@ -15,7 +15,8 @@ class OrderAdmin(admin.ModelAdmin):
      search_fields = ('customer__email',)
      inlines = [OrderItemInline]
 
-                        @admin.register(OrderItem)
-                        class OrderItemAdmin(admin.ModelAdmin):
-                            list_display = ('order', 'product', 'quantity', 'price')
-                                search_fields = ('order__id', 'product__name')
+     @admin.register(OrderItem)
+
+class OrderItemAdmin(admin.ModelAdmin):
+     list_display = ('order', 'product', 'quantity', 'price')
+     search_fields = ('order__id', 'product__name')
