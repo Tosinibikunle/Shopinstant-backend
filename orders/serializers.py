@@ -1,4 +1,4 @@
-# orders/serializers.py
+
 
 from rest_framework import serializers
 from .models import Order, OrderItem
@@ -6,11 +6,11 @@ from products.serializers import ProductSerializer
 
 class OrderItemSerializer(serializers.ModelSerializer):
     product = ProductSerializer(read_only=True)
-        product_id = serializers.PrimaryKeyRelatedField(
-                queryset=ProductSerializer.Meta.model.objects.all(),
-                        source='product',
-                                write_only=True
-                                    )
+    product_id = serializers.PrimaryKeyRelatedField(
+    queryset=ProductSerializer.Meta.model.objects.all(),
+    source='product',
+    write_only=True
+    )
 
                                         class Meta:
                                                 model = OrderItem
