@@ -12,15 +12,15 @@ class OrderItemSerializer(serializers.ModelSerializer):
     write_only=True
     )
 
-                                        class Meta:
-                                                model = OrderItem
-                                                        fields = ['id', 'product', 'product_id', 'quantity', 'price']
+class Meta:
+    model = OrderItem
+    fields = ['id', 'product', 'product_id', 'quantity', 'price']
 
-                                                        class OrderSerializer(serializers.ModelSerializer):
-                                                            customer = serializers.StringRelatedField(read_only=True)
-                                                                items = OrderItemSerializer(many=True)
+class OrderSerializer(serializers.ModelSerializer):
+  customer = serializers.StringRelatedField(read_only=True)
+  items = OrderItemSerializer(many=True)
 
-                                                                    class Meta:
+                        class Meta:
                                                                             model = Order
                                                                                     fields = ['id', 'customer', 'created_at', 'is_paid', 'total_price', 'shipping_address', 'items']
 
