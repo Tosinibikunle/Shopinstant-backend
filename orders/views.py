@@ -6,14 +6,14 @@ from .serializers import OrderSerializer
 
 class OrderCreateView(generics.CreateAPIView):
     serializer_class = OrderSerializer
-        permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
-            def perform_create(self, serializer):
-                    serializer.save(customer=self.request.user)
+    def perform_create(self, serializer):
+       serializer.save(customer=self.request.user)
 
-                    class OrderListView(generics.ListAPIView):
-                        serializer_class = OrderSerializer
-                            permission_classes = [permissions.IsAuthenticated]
+class OrderListView(generics.ListAPIView):
+     serializer_class = OrderSerializer
+     permission_classes = [permissions.IsAuthenticated]
 
-                                def get_queryset(self):
-                                        return Order.objects.filter(customer=self.request.user)
+    def get_queryset(self):
+       return Order.objects.filter(customer=self.request.user)
