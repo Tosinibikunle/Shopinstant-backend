@@ -7,10 +7,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-        path('api/users/', include('users.urls')),
-            path('api/products/', include('products.urls')),
-                path('api/orders/', include('orders.urls')),  # ✅ NEW: include orders API
-                ]
+    path('api/users/', include('users.urls')),
+    path('api/products/', include('products.urls')),
+    path('api/orders/', include('orders.urls')),  # ✅ NEW: include orders API
+      ]
 
-                if settings.DEBUG:
-                    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
