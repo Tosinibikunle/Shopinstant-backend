@@ -10,8 +10,8 @@ class CartItemSerializer(serializers.ModelSerializer):
     queryset=CartItem._meta.get_field('product').remote_field.model.objects.all(),
     source='product',
     write_only=True
-                                    )
+      )
 
-                                        class Meta:
-                                                model = CartItem
-                                                        fields = ['id', 'product', 'product_id', 'quantity', 'added_at']
+class Meta:
+   model = CartItem
+   fields = ['id', 'product', 'product_id', 'quantity', 'added_at']
