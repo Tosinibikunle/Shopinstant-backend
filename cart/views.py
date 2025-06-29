@@ -6,16 +6,13 @@ from .serializers import CartItemSerializer
 
 class CartItemListCreateView(generics.ListCreateAPIView):
     serializer_class = CartItemSerializer
-        permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated]
 
-            def get_queryset(self):
-                    return CartItem.objects.filter(user=self.request.user)
+    def get_queryset(self)
+       return CartItem.objects.filter(user=self.request.user)
 
-                        def perform_create(self, serializer):
-                                existing_item = CartItem.objects.filter(
-                                            user=self.request.user,
-                                                        product=serializer.validated_data['product']
-                                                                ).first()
+    def perform_create(self, serializer):
+       existing_item = CartItem.objects.filter(user=self.request.user,product=serializer.validated_data['product] ).first()
 
                                                                         if existing_item:
                                                                                     existing_item.quantity += serializer.validated_data.get('quantity', 1)
