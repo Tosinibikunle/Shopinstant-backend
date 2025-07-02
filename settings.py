@@ -244,18 +244,6 @@ SIMPLE_JWT = {
     'SIGNING_KEY': SECRET_KEY,
     'VERIFYING_KEY': None,
     'AUDIENCE': None,
-    'ISSUER': None,
-    'JWK_URL': None,
 }
-
-# Custom user model (if using a custom model)
-AUTH_USER_MODEL = 'users.User'
-                                                                                                                                                                                                                                                                                                                                                                                            'SIGNING_KEY': SECRET_KEY,
-                                                                                                                                                                                                                                                                                                                                                                                                'VERIFYING_KEY': None,
-                                                                                                                                                                                                                                                                                                                                                                                                    'AUDIENCE': None,
-                                                                                                                                                                                                                                                                                                                                                                                                        'ISSUER': None,
-                                                                                                                                                                                                                                                                                                                                                                                                            'JWK_URL': None,
-                                                                                                                                                                                                                                                                                                                                                                                                            }
-
-                                                                                                                                                                                                                                                                                                                                                                                                            # Custom user model (if using a custom model)
-                                                                                                                                                                                                                                                                                                                                                                                                            AUTH_USER_MODEL = 'users.User'
+                                                                                                   
+                                                                                                                                                                    
