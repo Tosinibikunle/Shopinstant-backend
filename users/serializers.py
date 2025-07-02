@@ -22,27 +22,27 @@ class UserSerializer(serializers.ModelSerializer):
     def validate(self, data):
        if data['password'] != data['password2']:
            raise serializers.ValidationError("Passwords do not match.")
-        return data
+           return data
 
     def create(self, validated_data):
         validated_data.pop('password2')
         user = User.objects.create_user(**validated_data)
         return user
 
- class LoginSerializer(serializers.Serializer):
+class LoginSerializer(serializers.Serializer):
       email = serializers.EmailField()    
       password = serializers.CharField(write_only=True, style={'input_type': 'password'})
 
- class UserWithTokenSerializer(serializers.ModelSerializer):
-     token = serializers.SerializerMethodField()
+class UserWithTokenSerializer(serializers.ModelSerializer):
+    token = serializers.SerializerMethodField()
 
-                                                                                                                            class Meta:
-                                                                                                                                    model = User
-                                                                                                                                            fields = ['id', 'email', 'first_name', 'last_name', 'phone_number', 'is_vendor', 'token']
+    class Meta:
+        model = User
+        fields = ['id', 'email', 'first_name', 'last_name', 'phone_number', 'is_vendor', 'token']
 
-                                                                                                                                                def get_token(self, obj):
-                                                                                                                                                        refresh = RefreshToken.for_user(obj)
-                                                                                                                                                                return {
-                                                                                                                                                                            'refresh': str(refresh),
-                                                                                                                                                                                        'access': str(refresh.access_token),
-                                                                                                                                                                                                }
+    def get_token(self, obj):
+        refresh = RefreshToken.for_user(obj)
+        return {
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+        }

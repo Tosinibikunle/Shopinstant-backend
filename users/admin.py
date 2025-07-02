@@ -1,4 +1,4 @@
-# users/admin.py
+
 
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
@@ -20,5 +20,5 @@ class UserAdmin(BaseUserAdmin):
           }),
       )
     search_fields = ('email', 'first_name', 'last_name')
-
-    admin.site.register(User, UserAdmin)
+    
+admin.site.register(User, UserAdmin)
