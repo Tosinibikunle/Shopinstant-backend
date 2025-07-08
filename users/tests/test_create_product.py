@@ -11,16 +11,16 @@ User = get_user_model()
 
 class CreateProductTest(APITestCase):
     def setUp(self):
-            self.vendor = User.objects.create_user(
-                        email="vendor@example.com",
-                                    first_name="Vend",
-                                                last_name="Or",
-                                                            phone_number="08111112222",
-                                                                        password="vendorpass123",
-                                                                                    is_vendor=True
-                                                                                            )
-                                                                                                    self.token = RefreshToken.for_user(self.vendor).access_token
-                                                                                                            self.category = Category.objects.create(name="Electronics", slug="electronics")
+       self.vendor = User.objects.create_user(
+       email="vendor@example.com",
+       first_name="Vend",
+       last_name="Or",
+       phone_number="08111112222",
+       password="vendorpass123",
+       is_vendor=True,    )
+       
+   self.token = RefreshToken.for_user(self.vendor).access_token
+   self.category = Category.objects.create(name="Electronics", slug="electronics")
 
                                                                                                                 def test_vendor_can_create_product(self):
                                                                                                                         url = reverse('product-list-create')
