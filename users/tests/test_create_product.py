@@ -21,10 +21,10 @@ class CreateProductTest(APITestCase):
        
    self.token = RefreshToken.for_user(self.vendor).access_token
    self.category = Category.objects.create(name="Electronics", slug="electronics")
-
-                                                                                                                def test_vendor_can_create_product(self):
-                                                                                                                        url = reverse('product-list-create')
-                                                                                                                                self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.token}')
+   
+   def test_vendor_can_create_product(self):
+       url = reverse('product-list-create')
+       self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.token}')
                                                                                                                                         data = {
                                                                                                                                                     "name": "Smartphone",
                                                                                                                                                                 "slug": "smartphone",
