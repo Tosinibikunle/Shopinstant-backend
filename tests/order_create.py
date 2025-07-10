@@ -12,13 +12,13 @@ User = get_user_model()
 
 class OrderCreateTest(APITestCase):
     def setUp(self):
-            self.user = User.objects.create_user(
-                        email="orderuser@example.com",
-                                    first_name="Order",
-                                                last_name="User",
-                                                            phone_number="08012340000",
-                                                                        password="orderpass123"
-                                                                                )
+       self.user = User.objects.create_user(
+       email="orderuser@example.com",
+       first_name="Order",
+       last_name="User",
+       phone_number="08012340000",
+       password="orderpass",
+         )
                                                                                         self.token = RefreshToken.for_user(self.user).access_token
                                                                                                 self.category = Category.objects.create(name="Accessories", slug="accessories")
                                                                                                         self.product = Product.objects.create(
