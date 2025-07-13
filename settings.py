@@ -153,9 +153,9 @@ INSTALLED_APPS = [
     'orders',
     'cart',
     'payments',
-    'reviews',
-    'coupons',
-    'core',
+    # 'reviews',
+    # 'coupons',
+    # 'core',
 ]
 
 MIDDLEWARE = [
