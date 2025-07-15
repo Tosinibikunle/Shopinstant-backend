@@ -2,15 +2,15 @@ version: '3.9'
 
 services:
   db:
-      image: postgres:15
-          volumes:
-                - postgres_data:/var/lib/postgresql/data/
-                    environment:
-                          - POSTGRES_DB=shopinstant
-                                - POSTGRES_USER=shopuser
-                                      - POSTGRES_PASSWORD=shoppass
-                                          ports:
-                                                - "5432:5432"
+  image: postgres:15
+  volumes:
+    - postgres_data:/var/lib/postgresql/data/
+  environment:
+      - POSTGRES_DB=shopinstant
+      - POSTGRES_USER=shopuser
+      - POSTGRES_PASSWORD=shoppass
+  ports:
+     - "5432:5432"
 
                                                   web:
                                                       build: .
