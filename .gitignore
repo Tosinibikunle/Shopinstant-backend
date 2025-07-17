@@ -1,0 +1,64 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Django migrations
+*/migrations/
+!*/migrations/__init__.py
+
+# SQLite database files
+*.sqlite3
+
+# Local env files
+.env
+*.env
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+
+# IDEs
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs
+*.log
+
+# Test & coverage
+htmlcov/
+.tox/
+.nox/
+.coverage
+coverage.xml
+*.cover
+*.py,cover
+
+# Docker
+*.pid
+*.tgz
+*.bak
+
+# node (if you use node for frontend)
+node_modules/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# GitHub Codespaces (if used)
+.devcontainer/
