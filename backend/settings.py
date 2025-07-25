@@ -121,11 +121,8 @@ SIMPLE_JWT = {
 }
 
 # Custom user model (if using a custom model)
-AUTH_USER_MODEL = 'users.User'# backend/settings.py
+AUTH_USER_MODEL = 'users.User'  # backend/settings.py
 
-import os
-from pathlib import Path
-from datetime import timedelta
 
 # BASE_DIR is the directory where manage.py is located
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -239,5 +236,3 @@ SIMPLE_JWT = {
     'VERIFYING_KEY': None,
     'AUDIENCE': None,
 }
-                                                                                                   
-                                                                                                                                                                    

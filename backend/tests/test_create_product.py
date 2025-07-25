@@ -9,6 +9,7 @@ from products.models import Category, Product
 
 User = get_user_model()
 
+
 class CreateProductTest(APITestCase):
     def setUp(self):
         self.vendor = User.objects.create_user(
@@ -20,7 +21,8 @@ class CreateProductTest(APITestCase):
             is_vendor=True,
         )
         self.token = RefreshToken.for_user(self.vendor).access_token
-        self.category = Category.objects.create(name="Electronics", slug="electronics")
+        self.category = Category.objects.create(
+            name="Electronics", slug="electronics")
 
     def test_vendor_can_create_product(self):
         url = reverse('product-list-create')

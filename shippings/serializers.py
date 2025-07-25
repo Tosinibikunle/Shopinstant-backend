@@ -1,13 +1,14 @@
 # shipping/serializers.py
-from rest_framework import serializers
+from .serializers import serializers
 from .models import ShippingAddress, ShippingMethod
+
 
 class ShippingAddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = ShippingAddress
         fields = [
-            'id', 'full_name', 'address_line1', 'address_line2', 
-            'city', 'state', 'postal_code', 'country', 
+            'id', 'full_name', 'address_line1', 'address_line2',
+            'city', 'state', 'postal_code', 'country',
             'phone_number', 'is_default', 'created_at'
         ]
         read_only_fields = ['id', 'created_at']
@@ -16,6 +17,7 @@ class ShippingAddressSerializer(serializers.ModelSerializer):
         # Automatically associate the shipping address with the logged-in user
         validated_data['user'] = self.context['request'].user
         return super().create(validated_data)
+
 
 class ShippingMethodSerializer(serializers.ModelSerializer):
     class Meta:
