@@ -32,7 +32,8 @@ class InitializePaymentView(View):
             "callback_url": "https://your-frontend-domain.com/payment/callback/",
         }
 
-        response = requests.post(PAYSTACK_INITIALIZE_URL, json=payload, headers=headers)
+        response = requests.post(
+            PAYSTACK_INITIALIZE_URL, json=payload, headers=headers)
         res_data = response.json()
 
         if res_data.get("status"):
