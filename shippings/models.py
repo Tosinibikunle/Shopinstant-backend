@@ -3,8 +3,10 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+
 class ShippingAddress(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='shipping_addresses')
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='shipping_addresses')
     full_name = models.CharField(max_length=255)
     address_line1 = models.CharField(max_length=255)
     address_line2 = models.CharField(max_length=255, blank=True, null=True)
@@ -18,6 +20,7 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return f"{self.full_name} - {self.city}"
+
 
 class ShippingMethod(models.Model):
     name = models.CharField(max_length=100)
