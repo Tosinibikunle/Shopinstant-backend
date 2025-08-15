@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class ShippingsConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'shippings'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "shippings"
