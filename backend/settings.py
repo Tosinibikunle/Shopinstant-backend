@@ -236,3 +236,7 @@ SIMPLE_JWT = {
     'VERIFYING_KEY': None,
     'AUDIENCE': None,
 }
+
+
+PAYSTACK_SECRET_KEY = "your_secret_key_here"
+
