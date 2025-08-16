@@ -10,52 +10,49 @@ from orders.models import Order, OrderItem
 
 User = get_user_model()
 
+
 class OrderCreateTest(APITestCase):
     def setUp(self):
-       self.user = User.objects.create_user(
-       email="orderuser@example.com",
-       first_name="Order",
-       last_name="User",
-       phone_number="08012340000",
-       password="orderpass",
-         )
-                                                                                        self.token = RefreshToken.for_user(self.user).access_token
-                                                                                                self.category = Category.objects.create(name="Accessories", slug="accessories")
-                                                                                                        self.product = Product.objects.create(
-                                                                                                                    name="Wrist Watch",
-                                                                                                                                slug="wrist-watch",
-                                                                                                                                            price=150.00,
-                                                                                                                                                        stock=10,
-                                                                                                                                                                    seller=self.user,
-                                                                                                                                                                                category=self.category
-                                                                                                                                                                                        )
+        self.user = User.objects.create_user(
+            email="orderuser@example.com",
+            first_name="Order",
+            last_name="User",
+            phone_number="08012340000",
+            password="orderpass",
+        )
+        self.token = RefreshToken.for_user(self.user).access_token
+        self.category = Category.objects.create(name="Accessories", slug="accessories")
+        self.product = Product.objects.create(
+            name="Wrist Watch",
+            slug="wrist-watch",
+            price=150.00,
+            stock=10,
+            seller=self.user,
+            category=self.category,
+        )
 
-                                                                                                                                                                                            def test_user_can_place_order(self):
-                                                                                                                                                                                                    url = reverse('order-create')
-                                                                                                                                                                                                            self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.token}')
-                                                                                                                                                                                                                    data = {
-                                                                                                                                                                                                                                "shipping_address": "123 Main Street, Lagos",
-                                                                                                                                                                                                                                            "total_price": "300.00",
-                                                                                                                                                                                                                                                        "items": [
-                                                                                                                                                                                                                                                                        {
-                                                                                                                                                                                                                                                                                            "product_id": self.product.id,
-                                                                                                                                                                                                                                                                                                                "quantity": 2,
-                                                                                                                                                                                                                                                                                                                                    "price": "150.00"
-                                                                                                                                                                                                                                                                                                                                                    }
-                                                                                                                                                                                                                                                                                                                                                                ]
-                                                                                                                                                                                                                                                                                                                                                                        }
-                                                                                                                                                                                                                                                                                                                                                                                response = self.client.post(url, data, format='json')
-                                                                                                                                                                                                                                                                                                                                                                                        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-                                                                                                                                                                                                                                                                                                                                                                                                self.assertEqual(Order.objects.count(), 1)
-                                                                                                                                                                                                                                                                                                                                                                                                        self.assertEqual(OrderItem.objects.count(), 1)
-                                                                                                                                                                                                                                                                                                                                                                                                                self.assertEqual(OrderItem.objects.first().quantity, 2)
+    def test_user_can_place_order(self):
+        url = reverse("order-create")
+        self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {self.token}")
+        data = {
+            "shipping_address": "123 Main Street, Lagos",
+            "total_price": "300.00",
+            "items": [
+                {"product_id": self.product.id, "quantity": 2, "price": "150.00"}
+            ],
+        }
+        response = self.client.post(url, data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Order.objects.count(), 1)
+        self.assertEqual(OrderItem.objects.count(), 1)
+        self.assertEqual(OrderItem.objects.first().quantity, 2)
 
-                                                                                                                                                                                                                                                                                                                                                                                                                    def test_unauthenticated_user_cannot_place_order(self):
-                                                                                                                                                                                                                                                                                                                                                                                                                            url = reverse('order-create')
-                                                                                                                                                                                                                                                                                                                                                                                                                                    data = {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                "shipping_address": "No Auth Street",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            "total_price": "50.00",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                        "items": []
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        response = self.client.post(url, data, format='json')
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+    def test_unauthenticated_user_cannot_place_order(self):
+        url = reverse("order-create")
+        data = {
+            "shipping_address": "No Auth Street",
+            "total_price": "50.00",
+            "items": [],
+        }
+        response = self.client.post(url, data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)

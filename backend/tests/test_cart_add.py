@@ -18,31 +18,32 @@ class AddToCartTest(APITestCase):
             first_name="Cart",
             last_name="User",
             phone_number="08000000000",
-            password="testcart123"
+            password="testcart123",
         )
 
         self.token = RefreshToken.for_user(self.user).access_token
         self.category = Category.objects.create(name="Books", slug="books")
         self.product = Product.objects.create(
-            name="Django for APIs", slug="django-apis", price=49.99,  stock=5, seller=self.user,  category=self.category)
+            name="Django for APIs",
+            slug="django-apis",
+            price=49.99,
+            stock=5,
+            seller=self.user,
+            category=self.category,
+        )
 
     def test_add_product_to_cart(self):
-        url = reverse('cart-list-create')
-        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.token}')
-        data = {
-            "product_id": self.product.id,
-            "quantity": 2
-        }
+        url = reverse("cart-list-create")
+        self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {self.token}")
+        data = {"product_id": self.product.id, "quantity": 2}
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertTrue(CartItem.objects.filter(
-            user=self.user, product=self.product).exists())
+        self.assertTrue(
+            CartItem.objects.filter(user=self.user, product=self.product).exists()
+        )
 
     def test_unauthenticated_user_cannot_add_to_cart(self):
-        url = reverse('cart-list-create')
-        data = {
-            "product_id": self.product.id,
-            "quantity": 1
-        }
+        url = reverse("cart-list-create")
+        data = {"product_id": self.product.id, "quantity": 1}
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
