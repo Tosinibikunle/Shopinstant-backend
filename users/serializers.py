@@ -65,6 +65,7 @@ class UserWithTokenSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "phone_number",
+            "image",
             "is_vendor",
             "token",
         ]

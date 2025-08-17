@@ -39,6 +39,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_vendor = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(
+        upload_to="profile_images/",
+        blank=True,
+        null=True,
+        default="profile_images/default.jpg",
+        )
 
     objects = UserManager()
 
