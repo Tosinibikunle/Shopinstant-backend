@@ -44,7 +44,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         blank=True,
         null=True,
         default="profile_images/default.jpg",
-        )
+    )
 
     objects = UserManager()
 
