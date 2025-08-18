@@ -5,10 +5,8 @@ from .models import ShippingMethod
 class ShippingMethodTestCase(TestCase):
     def setUp(self):
         # Set up initial test data
-        ShippingMethod.objects.create(
-            name="Standard", cost=10.00, estimated_days=5)
-        ShippingMethod.objects.create(
-            name="Express", cost=25.00, estimated_days=2)
+        ShippingMethod.objects.create(name="Standard", cost=10.00, estimated_days=5)
+        ShippingMethod.objects.create(name="Express", cost=25.00, estimated_days=2)
 
     def test_shipping_method_count(self):
         """Ensure two shipping methods exist."""
