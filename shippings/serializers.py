@@ -22,7 +22,7 @@ class ShippingAddressSerializer(serializers.ModelSerializer):
         read_only_fields = ["id", "created_at"]
 
     def create(self, validated_data):
-        # Automatically associate the shipping address with the logged-in user
+      
         validated_data["user"] = self.context["request"].user
         return super().create(validated_data)
 
