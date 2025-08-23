@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import ShippingMethod
+from ...shippings.models import ShippingMethod
 
 
 class ShippingMethodTestCase(TestCase):
