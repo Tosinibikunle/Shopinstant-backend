@@ -5,6 +5,7 @@ from django.contrib.contenttypes.models import ContentType
 
 User = get_user_model()
 
+
 class Ticket(models.Model):
     ENQUIRY = "enquiry"
     COMPLAINT = "complaint"
@@ -36,7 +37,9 @@ class Response(models.Model):
         User, on_delete=models.CASCADE, related_name="given_responses"
     )
     # Generic relation to Ticket
-    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, related_name="responses")
+    ticket = models.ForeignKey(
+        Ticket, on_delete=models.CASCADE, related_name="responses"
+    )
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
