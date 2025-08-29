@@ -3,8 +3,6 @@ from rest_framework import viewsets, permissions
 from .models import Ticket, Response, Feedback
 from .serializers import TicketSerializer, ResponseSerializer, FeedbackSerializer
 
-# Create your views here.
-
 
 class TicketViewSet(viewsets.ModelViewSet):
     queryset = Ticket.objects.all()
