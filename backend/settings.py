@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'cart',
     'payments',
     'shippings',
+    'customer_care',
 
 ]
 
