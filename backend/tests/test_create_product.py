@@ -1,5 +1,3 @@
-# products/tests/test_create_product.py
-
 from django.urls import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
