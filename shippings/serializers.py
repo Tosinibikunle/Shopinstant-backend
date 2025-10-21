@@ -1,5 +1,5 @@
 
-from .serializers import serializers
+from rest_framework import serializers
 from .models import ShippingAddress, ShippingMethod
 
 
