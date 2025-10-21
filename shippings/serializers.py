@@ -1,4 +1,4 @@
-# shipping/serializers.py
+
 from .serializers import serializers
 from .models import ShippingAddress, ShippingMethod
 
