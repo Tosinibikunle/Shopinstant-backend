@@ -1,4 +1,4 @@
-# payments/serializers.py
+
 from .models import Payment
 from rest_framework import serializers
 

@@ -1,4 +1,3 @@
-# payments/views.py
 
 import requests
 from django.conf import settings
