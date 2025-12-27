@@ -1,8 +1,25 @@
-# products/views.py
+
 from rest_framework import generics, permissions
 from .models import Product, Category
 from .serializers import ProductSerializer, CategorySerializer
 
+
+# --- Custom Permissions ---
+
+class IsSellerOrReadOnly(permissions.BasePermission):
+    """
+    Custom permission to only allow the seller of a product to edit or delete it.
+    """
+    def has_object_permission(self, request, view, obj):
+        # Read permissions are allowed to any request (GET, HEAD, OPTIONS)
+        if request.method in permissions.SAFE_METHODS:
+            return True
+
+        # Write permissions are only allowed if the user is the seller
+        return obj.seller == request.user
+
+
+# --- Views ---
 
 class CategoryListView(generics.ListAPIView):
     """
@@ -42,17 +59,11 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     API View to retrieve, update, or delete a specific product.
 
     GET: Public access.
-    PUT/PATCH/DELETE: Requires authentication.
+    PUT/PATCH/DELETE: Restricted to the product's seller only.
     """
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
-    def perform_update(self, serializer):
-        """
-        Custom update logic.
-        
-        Note: This currently resets the 'seller' to the user making the request.
-        If an admin edits a user's product, the admin becomes the seller.
-        """
-        serializer.save(seller=self.request.user)
+    
+    # Use the custom permission class defined above.
+    # This ensures User A cannot delete User B's product.
+    permission_classes = [IsSellerOrReadOnly]
