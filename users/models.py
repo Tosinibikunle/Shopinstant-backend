@@ -21,11 +21,9 @@ class UserManager(BaseUserManager):
         # Normalize the email address (lowercase the domain part)
         email = self.normalize_email(email)
         
-        # Create the user instance
+    
         user = self.model(email=email, **extra_fields)
         
-        # set_password hashes the password before saving it.
-        # NEVER save a password directly without this method.
         user.set_password(password)
         
         user.save(using=self._db)
