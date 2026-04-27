@@ -13,7 +13,6 @@ class OrderCreateView(generics.CreateAPIView):
     """
     serializer_class = OrderSerializer
     
-    # Require the user to be logged in to access this endpoint.
     permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
@@ -24,7 +23,6 @@ class OrderCreateView(generics.CreateAPIView):
         as the 'customer' of the order. This prevents the user from
         having to manually submit their own user ID (or spoofing someone else's).
         """
-        # Save the order with the user from the request object
         serializer.save(customer=self.request.user)
 
 
@@ -45,5 +43,4 @@ class OrderListView(generics.ListAPIView):
         This overrides the default behavior (which would return all orders)
         to implement Row-Level Security.
         """
-        # Filter orders so the user only sees their own history
         return Order.objects.filter(customer=self.request.user)
