@@ -15,8 +15,6 @@ class TicketSerializer(serializers.ModelSerializer):
     - 'is_resolved' is read-only for the user (only staff should toggle this).
     """
     
-    # Display the user's string representation (e.g., email) instead of ID.
-    # read_only=True because the user is set automatically by the backend.
     user = serializers.StringRelatedField(read_only=True)
 
     class Meta:
@@ -31,8 +29,6 @@ class TicketSerializer(serializers.ModelSerializer):
             "is_resolved",
         ]
         
-        # Security: Prevent users from setting their own 'is_resolved' status
-        # or spoofing the 'user' field or 'created_at' timestamp.
         read_only_fields = ["id", "user", "created_at", "is_resolved"]
 
 
@@ -43,10 +39,8 @@ class ResponseSerializer(serializers.ModelSerializer):
     Used by Customer Care Representatives to reply to tickets.
     """
     
-    # Auto-populated with the logged-in staff member's details.
     customer_care_rep = serializers.StringRelatedField(read_only=True)
     
-    # Link the response to a specific ticket ID.
     ticket = serializers.PrimaryKeyRelatedField(queryset=Ticket.objects.all())
 
     class Meta:
@@ -68,9 +62,6 @@ class FeedbackSerializer(serializers.ModelSerializer):
     
     user = serializers.StringRelatedField(read_only=True)
     
-    # The ticket being rated.
-    # We allow null/false requirement here in case the ticket ID is passed 
-    # via the URL (e.g., /api/tickets/5/feedback/) and injected by the View.
     ticket = serializers.PrimaryKeyRelatedField(
         queryset=Ticket.objects.all(), required=False, allow_null=True
     )
