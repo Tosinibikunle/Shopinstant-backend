@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
-# Get the active User model (handles custom user models automatically)
 User = get_user_model()
 
 
@@ -12,14 +11,12 @@ class Category(models.Model):
     """
     name = models.CharField(max_length=100, unique=True)
     
-    # The 'slug' is a URL-friendly version of the name (e.g., "smart-phones").
-    # unique=True ensures two categories don't share the same URL.
     slug = models.SlugField(unique=True)
     
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        # Fixes the plural name in the Admin panel (default would be "Categorys")
+        
         verbose_name_plural = "Categories"
 
     def __str__(self):
