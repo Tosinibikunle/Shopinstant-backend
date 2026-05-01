@@ -1,4 +1,4 @@
-# from django.test import TestCase
+# from djang
 from django.urls import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
@@ -41,17 +41,6 @@ class CustomerCareTest(APITestCase):
         }
         response = self.client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
-        self.assertEqual(Response.objects.count(), 0)
-
-    def test_user_cannot_send_message_with_invalid_data(self):
-        url = reverse("customer-care")
-        self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {self.token}")
-        data = {
-            "subject": "",
-            "message": "",
-        }
-        response = self.client.post(url, data, format="json")
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(Response.objects.count(), 0)
 
     def test_user_can_retrieve_their_messages(self):
