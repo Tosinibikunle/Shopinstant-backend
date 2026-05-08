@@ -2,9 +2,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
-# Get the active User model for the project.
-# This is a best practice in Django: it ensures your code works even if
-# you have swapped out the default User model for a custom one.
 User = get_user_model()
 
 
@@ -15,10 +12,7 @@ class ShippingAddress(models.Model):
     A user can have multiple shipping addresses, but typically only one
     will be marked as the default.
     """
-    
-    # Relationship to the User model.
-    # on_delete=models.CASCADE: If the User is deleted, delete all their addresses too.
-    # related_name='shipping_addresses': Allows accessing addresses like `user.shipping_addresses.all()`
+
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='shipping_addresses'
     )
