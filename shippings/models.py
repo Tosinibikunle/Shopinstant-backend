@@ -17,24 +17,17 @@ class ShippingAddress(models.Model):
         User, on_delete=models.CASCADE, related_name='shipping_addresses'
     )
     
-    full_name = models.CharField(max_length=255)  # Name of the person receiving the package
-    address_line1 = models.CharField(max_length=255)  # Street address, P.O. Box
+    full_name = models.CharField(max_length=255) 
+    address_line1 = models.CharField(max_length=255)
     
-    # Optional field for apartment, suite, unit, etc.
-    # blank=True allows the form to be empty; null=True allows the DB to store NULL.
     address_line2 = models.CharField(max_length=255, blank=True, null=True)
     
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)
     postal_code = models.CharField(max_length=20)
     country = models.CharField(max_length=100)
-    phone_number = models.CharField(max_length=20)  # Contact for delivery driver
-    
-    # Flag to indicate if this is the user's primary address.
-    # Logic to ensure only one is True per user should be handled in the view/serializer.
+    phone_number = models.CharField(max_length=20)
     is_default = models.BooleanField(default=False)
-    
-    # Automatically set the timestamp when the object is first created.
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -48,12 +41,8 @@ class ShippingMethod(models.Model):
     These are usually set up by the site admin, not the end user.
     """
     name = models.CharField(max_length=100)
-    
-    # Use DecimalField for currency to avoid floating-point rounding errors.
-    # max_digits=10, decimal_places=2 allows values up to 99,999,999.99
     price = models.DecimalField(max_digits=10, decimal_places=2)
     
-    # Integer field for the estimated time (e.g., 3 days, 5 days).
     estimated_delivery_days = models.PositiveIntegerField()
 
     def __str__(self):
