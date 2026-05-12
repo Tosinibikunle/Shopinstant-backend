@@ -6,12 +6,6 @@ User = get_user_model()
 
 
 class ShippingAddress(models.Model):
-    """
-    Represents a physical delivery location for a user.
-
-    A user can have multiple shipping addresses, but typically only one
-    will be marked as the default.
-    """
 
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='shipping_addresses'
@@ -36,15 +30,11 @@ class ShippingAddress(models.Model):
 
 
 class ShippingMethod(models.Model):
-    """
-    Represents the available shipping options (e.g., Standard, Express, Next-Day).
-    These are usually set up by the site admin, not the end user.
-    """
+    
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     
     estimated_delivery_days = models.PositiveIntegerField()
 
     def __str__(self):
-        """String representation: e.g., 'Express Delivery ($15.00)'"""
         return f"{self.name} (${self.price})"
