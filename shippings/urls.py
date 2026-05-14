@@ -1,18 +1,10 @@
 from django.urls import path
 from .views import ShippingAddressViewSet, ShippingMethodViewSet
 
-# URL Configuration
-# This file maps URL paths to specific ViewSets and actions.
-# Since we are not using a DRF 'Router' here, we manually bind HTTP methods
-# (GET, POST, PUT, DELETE) to ViewSet actions (list, create, update, destroy).
+# U
 
 urlpatterns = [
-    # --- Shipping Addresses ---
     
-    # Path: /api/shipping/ (assuming included at /api/shipping/)
-    # Maps to the list of addresses (GET) or creating a new one (POST).
-    path(
-        '',
         ShippingAddressViewSet.as_view({
             'get': 'list',    # GET request -> returns a list of addresses
             'post': 'create'  # POST request -> creates a new address
