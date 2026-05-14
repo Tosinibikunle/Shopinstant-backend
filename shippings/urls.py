@@ -21,10 +21,6 @@ urlpatterns = [
         name='shipping-address-detail'
     ),
 
-    # --- Shipping Methods ---
-
-    # Path: /api/shipping/methods/
-    # Maps to the list of methods (Standard, Express, etc.) or creating a new one.
     path(
         'methods/',
         ShippingMethodViewSet.as_view({
@@ -34,8 +30,7 @@ urlpatterns = [
         name='shipping-method-list-create'
     ),
 
-    # Path: /api/shipping/methods/<id>/
-    # Maps to operations on a single shipping method.
+    
     path(
         'methods/<int:pk>/',
         ShippingMethodViewSet.as_view({
