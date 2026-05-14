@@ -1,25 +1,22 @@
 from django.urls import path
 from .views import ShippingAddressViewSet, ShippingMethodViewSet
 
-# U
 
 urlpatterns = [
     
         ShippingAddressViewSet.as_view({
-            'get': 'list',    # GET request -> returns a list of addresses
-            'post': 'create'  # POST request -> creates a new address
+            'get': 'list',
+            'post': 'create'
         }),
         name='shipping-address-list-create'
     ),
 
-    # Path: /api/shipping/<id>/ (e.g., /api/shipping/1/)
-    # Maps to operations on a single specific address.
     path(
         '<int:pk>/',
         ShippingAddressViewSet.as_view({
-            'get': 'retrieve',  # GET request -> gets one specific address
-            'put': 'update',    # PUT request -> updates the address
-            'delete': 'destroy' # DELETE request -> deletes the address
+            'get': 'retrieve',
+            'put': 'update',
+            'delete': 'destroy'
         }),
         name='shipping-address-detail'
     ),
