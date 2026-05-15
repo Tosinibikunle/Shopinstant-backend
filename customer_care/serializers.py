@@ -6,14 +6,7 @@ User = get_user_model()
 
 
 class TicketSerializer(serializers.ModelSerializer):
-    """
-    Serializer for Customer Support Tickets.
     
-    This handles the creation and viewing of support requests.
-    Key Logic:
-    - Users can set the type, subject, and message.
-    - 'is_resolved' is read-only for the user (only staff should toggle this).
-    """
     
     user = serializers.StringRelatedField(read_only=True)
 
