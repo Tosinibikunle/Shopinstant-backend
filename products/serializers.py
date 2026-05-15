@@ -1,33 +1,15 @@
-# products/serializers.py
+
 from rest_framework import serializers
 from .models import Product, Category
 
 
 class CategorySerializer(serializers.ModelSerializer):
-    """
-    Serializer for Product Categories.
-    
-    This is used both as a standalone serializer (for listing categories)
-    and as a nested serializer inside ProductSerializer (to show category details).
-    """
     class Meta:
         model = Category
         fields = ["id", "name", "slug"]
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    """
-    Serializer for Products.
-
-    This serializer handles the display and creation of products.
-    It uses a common pattern to handle relationships:
-    1. Read operations show detailed nested objects (e.g., full category info).
-    2. Write operations accept simple IDs (e.g., category ID).
-    """
-    
-    # Read-Only Fields (for display)
-    
-    # Display the seller's string representation (e.g., email/username) instead of just the ID.
     seller = serializers.StringRelatedField(read_only=True)
     
     # Nest the CategorySerializer to show full details (id, name, slug) in the response.
