@@ -46,6 +46,7 @@ htmlcov/
 coverage.xml
 *.cover
 *.py,cover
+pytest
 
 # Docker
 *.pid
@@ -59,6 +60,3 @@ node_modules/
 build/
 dist/
 *.egg-info/
-
-# GitHub Codespaces (if used)
-.devcontainer/
