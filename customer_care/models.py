@@ -5,12 +5,7 @@ User = get_user_model()
 
 
 class Ticket(models.Model):
-    """
-    Represents a customer support issue or inquiry.
-    
-    This is the central model for the support system. Users create tickets,
-    and customer care reps respond to them.
-    """
+
     
     ENQUIRY = "enquiry"
     COMPLAINT = "complaint"
@@ -61,9 +56,6 @@ class Response(models.Model):
 
 
 class Feedback(models.Model):
-    """
-    User feedback regarding a specific Ticket resolution.
-    """
     
     ticket = models.OneToOneField(
         Ticket, on_delete=models.CASCADE, related_name="feedback", null=True, blank=True
