@@ -1,5 +1,3 @@
-# cart/views.py
-
 from rest_framework import generics, permissions
 from .models import CartItem
 from .serializers import CartItemSerializer
